@@ -1,0 +1,15 @@
+version: 0.0
+os: linux
+files:
+  - source: /scrpits
+    destination: /root/scripts
+  - source: /cfg/awslogs.conf
+    destination: /etc/awslogs
+hooks:
+  BeforeInstall:
+    - location: scripts/make_directory.sh
+      runas: root
+  AfterInstall:
+    - location: scripts/awslogs_restart.sh
+      timeout: 60
+      runas: root
